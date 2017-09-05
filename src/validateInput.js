@@ -5,14 +5,15 @@ const logger = bunyan.createLogger({name: 'reviewable-linker'})
 
 const validateInput = (results) => {
     for (const result of results) {
-        if (result.repository === null && result.pullNumber === null) {
+        logger.info(result)
+        if ((result.repository === null && result.pullNumber === null) || (result.repository === '' && result.pullNumber === '')) {
             _.remove
         }
-        if (result.repository === null) {
+        if (result.repository === null || result.repository === '') {
             logger.warn(result, 'Incomplete URL')
             _.remove(results, result)
         }
-        if (result.pullNumber === null) {
+        if (result.pullNumber === null || result.pullNumber === '') {
             logger.warn(result, 'Incomplete URL')
             _.remove(results, result)
         }

@@ -10,6 +10,9 @@ const validateInput = require('./validateInput.js')
 const logger = bunyan.createLogger({name: 'reviewable-linker'})
 const slackToken = process.env.SLACK_TOKEN || '';
 
+const id = 1
+const type = 'message'
+
 if (!slackToken) {
     logger.error('missing environment variable SLACK_TOKEN')
     process.exit(1)
@@ -39,9 +42,36 @@ const connect = () => {
         let results = commandParser(message)
         results = validateInput(results)
         if (!_.isEmpty(results)) {
-            logger.info(results)
+            results.unshift(message.channel)
+            sendMessage(results)
         }
       })
 }
 
-module.exports = connect
+const sendMessage = (reviews) => {
+    const urls = []
+    const channel = reviews[0]
+    let text = ''
+
+    reviews.shift()
+
+    _.map(reviews, (review) => {
+        logger.info('review')
+        logger.info(review)
+        urls.push(`https://reviewable.io/reviews/casestack/${review.repository}/${review.pullNumber}`)
+    })
+
+    for (const url of urls) {
+        text = `${text}\n${url}`
+    }
+    const message = {
+        id,
+        type,
+        channel,
+        text
+    }
+
+    rtm.send(message)
+}
+
+module.exports = connect, sendMessage
