@@ -7,8 +7,8 @@
     "url" : "hjdarnel/reviewable-linker"
   },
   "scripts": {
-    "start": "node built/server.js",
-    "start:dev": "nodemon src/server.js | bunyan -o short -l debug",
+    "start": "npm i && node src/server.js",
+    "start:dev": "npm i && nodemon src/server.js | bunyan -o short -l debug",
     "lint": "eslint src/*.js --cache"
   },
   "author": "Henry Darnell",
