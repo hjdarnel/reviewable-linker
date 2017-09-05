@@ -50,7 +50,7 @@ const sendMessage = (reviews) => {
     reviews.shift();
 
     _.map(reviews, (review) => {
-        urls.push(`https://reviewable.io/reviews/casestack/${review.repository}/${review.pullNumber}`);
+        urls.push(`https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullNumber}`);
     });
 
     for (const url of urls) {
