@@ -68,7 +68,7 @@ const sendMessage = (reviews) => {
         channel,
         text
     }
-    logger.info('Sending message', text)
+    logger.info(`Sending message in ${channel}:`, text)
     rtm.send(message)
 }
 

@@ -5,7 +5,6 @@ const logger = bunyan.createLogger({name: 'reviewable-linker'})
 
 const validateInput = (results) => {
     for (const result of results) {
-        logger.info(result)
         if ((result.repository === null && result.pullNumber === null) || (result.repository === '' && result.pullNumber === '')) {
             _.remove
         }
