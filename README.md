@@ -4,6 +4,8 @@ This is a simple Slack bot that will listen for GitHub PR links in whatever chan
 
 ## Setup
 
+0. Create bot on Slack team (`https://TEAMNAME.slack.com/apps/manage/custom-integrations` -> Bots -> Add Configuration)
+
 1. Clone repo
 
 2. Set `SLACK_TOKEN` to bot token
