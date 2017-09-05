@@ -2,9 +2,9 @@
   "name": "reviewable-linker",
   "version": "1.0.0",
   "description": "Slack bot to link Reviewable PRs from a GitHub link",
-  "repository" :{
-    "type" : "git", 
-    "url" : "hjdarnel/reviewable-linker"
+  "repository": {
+    "type": "git",
+    "url": "hjdarnel/reviewable-linker"
   },
   "scripts": {
     "start": "npm i && node src/server.js",
