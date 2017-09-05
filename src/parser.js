@@ -1,8 +1,8 @@
-// src/commandParser.js
+// src/parser.js
 
-const commandParser = (commandText) => {
+const parser = (message) => {
     const pullRegex = /http(?:s)?:\/\/(?:www\.)?github\.com\/casestack\/([a-z, A-Z, -]*)\/pull\/(\d*)/gm;
-    let data = pullRegex.exec(commandText.text);
+    let data = pullRegex.exec(message.text);
     const results = [];
 
     while (data != null) {
@@ -11,11 +11,11 @@ const commandParser = (commandText) => {
             pullNumber: data[2]
         };
         results.push(pull);
-        data = pullRegex.exec(commandText.text);
+        data = pullRegex.exec(message.text);
     }
 
     return results;
 
 };
 
-module.exports = commandParser;
+module.exports = parser;

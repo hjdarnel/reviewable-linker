@@ -4,7 +4,7 @@ const RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 const CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
 const _ = require('lodash');
 
-const commandParser = require('./commandParser.js');
+const parser = require('./parser.js');
 const validateInput = require('./validateInput.js');
 
 const logger = bunyan.createLogger({name: 'reviewable-linker'});
@@ -34,7 +34,7 @@ const connect = () => {
     rtm.start();
 
     rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-        let results = commandParser(message);
+        let results = parser(message);
         results = validateInput(results);
         if (!_.isEmpty(results)) {
             results.unshift(message.channel);
