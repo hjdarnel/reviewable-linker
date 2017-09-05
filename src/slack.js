@@ -1,75 +1,69 @@
-const bunyan = require('bunyan')
+const bunyan = require('bunyan');
 const RtmClient = require('@slack/client').RtmClient;
 const RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 const CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
-const _ = require('lodash')
+const _ = require('lodash');
 
-const commandParser = require('./commandParser.js')
-const validateInput = require('./validateInput.js')
+const commandParser = require('./commandParser.js');
+const validateInput = require('./validateInput.js');
 
-const logger = bunyan.createLogger({name: 'reviewable-linker'})
+const logger = bunyan.createLogger({name: 'reviewable-linker'});
 const slackToken = process.env.SLACK_TOKEN || '';
 
-const id = 1
-const type = 'message'
+const id = 1;
+const type = 'message';
 
 if (!slackToken) {
-    logger.error('missing environment variable SLACK_TOKEN')
-    process.exit(1)
+    logger.error('missing environment variable SLACK_TOKEN');
+    process.exit(1);
 }
 
 const rtm = new RtmClient(slackToken);
 
 const connect = () => {
-    let channel
-
     // The client will emit an RTM.AUTHENTICATED event on successful connection, with the `rtm.start` payload
     rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
-        for (const c of rtmStartData.channels) {
-            if (c.is_member) { channel = c.id }
-        }
         logger.info(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}, but not yet connected to a channel`);
-    })
+    });
 
     // you need to wait for the client to fully connect before you can send messages
     rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {
-        logger.info('Connection opened')
-    })
+        logger.info('Connection opened');
+    });
 
-    rtm.start()
+    rtm.start();
 
     rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-        let results = commandParser(message)
-        results = validateInput(results)
+        let results = commandParser(message);
+        results = validateInput(results);
         if (!_.isEmpty(results)) {
-            results.unshift(message.channel)
-            sendMessage(results)
+            results.unshift(message.channel);
+            sendMessage(results);
         }
-      })
-}
+      });
+};
 
 const sendMessage = (reviews) => {
-    const urls = []
-    const channel = reviews[0]
-    let text = ''
-
-    reviews.shift()
+    const urls = [];
+    const channel = reviews[0];
+    let text = '';
+    reviews.shift();
 
     _.map(reviews, (review) => {
-        urls.push(`https://reviewable.io/reviews/casestack/${review.repository}/${review.pullNumber}`)
-    })
+        urls.push(`https://reviewable.io/reviews/casestack/${review.repository}/${review.pullNumber}`);
+    });
 
     for (const url of urls) {
-        text = `${text}\n${url}`
+        text = `${text}\n${url}`;
     }
     const message = {
         id,
         type,
         channel,
         text
-    }
-    logger.info(`Sending message in ${channel}:`, text)
-    rtm.send(message)
-}
+    };
+    logger.info(`Sending message in ${channel}:`, text);
+    rtm.send(message);
+};
 
-module.exports = connect, sendMessage
+module.exports = connect;
