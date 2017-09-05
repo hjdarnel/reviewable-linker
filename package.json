@@ -2,12 +2,16 @@
   "name": "reviewable-linker",
   "version": "1.0.0",
   "description": "Slack bot to link Reviewable PRs from a GitHub link",
+  "repository" :{
+    "type" : "git", 
+    "url" : "hjdarnel/reviewable-linker"
+  },
   "scripts": {
     "start": "node built/server.js",
     "start:dev": "nodemon src/server.js | bunyan -o short -l debug",
     "lint": "eslint src/*.js --cache"
   },
-  "author": "",
+  "author": "Henry Darnell",
   "license": "ISC",
   "dependencies": {
     "@slack/client": "^3.12.0",
