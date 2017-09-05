@@ -13,3 +13,5 @@ This is a simple Slack bot that will listen for GitHub PR links in whatever chan
 3. Run `npm run start` to serve, or `npm run start:dev` for a reloading dev workspace
 
 Must have environment variable `SLACK_TOKEN` set to a bot user token for your Slack team. This begins with `xoxb-...`
+
+Finally, invite bot to a channel you'd like it to participate in. It will listen and respond in the same channel.
