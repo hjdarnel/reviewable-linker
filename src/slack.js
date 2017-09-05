@@ -56,8 +56,6 @@ const sendMessage = (reviews) => {
     reviews.shift()
 
     _.map(reviews, (review) => {
-        logger.info('review')
-        logger.info(review)
         urls.push(`https://reviewable.io/reviews/casestack/${review.repository}/${review.pullNumber}`)
     })
 
@@ -70,7 +68,7 @@ const sendMessage = (reviews) => {
         channel,
         text
     }
-
+    logger.info('Sending message', text)
     rtm.send(message)
 }
 
