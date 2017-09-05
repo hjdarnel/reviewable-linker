@@ -1,4 +1,3 @@
-// src/validateInput.js
 const bunyan = require('bunyan');
 const _ = require('lodash');
 const logger = bunyan.createLogger({name: 'reviewable-linker'});

@@ -1,5 +1,3 @@
-// src/parser.js
-
 const parser = (message) => {
     const pullRegex = /http(?:s)?:\/\/(?:www\.)?github\.com\/casestack\/([a-z, A-Z, -]*)\/pull\/(\d*)/gm;
     let data = pullRegex.exec(message.text);
