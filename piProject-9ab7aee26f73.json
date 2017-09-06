@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "piproject-179120",
+  "private_key_id": "9ab7aee26f73eaa18aa952430d0e5e293002daac",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCxzbid3ttv5Oa\nH+N4lUdCW75M/8wXEwF9TwHxHinp0O+ggI+WH2sxpzbLdVc+6VgGaMXwQjrkB5rK\n0ALLydZBIHCWqB0WKbDXbe5d7G/fYbeeVK+V/EWoUxVlLcLGQo9AA01HNJXaEks5\n8xeY/sptHXAILIuLppAWAA5pNA+7Ut1mZFlUIW+DbKrzVuNMhWN5vAJXfOUdNSjd\n+chtkLsklRzCEtIptDR6BIaIIWREzYp7nokhDEypKcVQ1niXdP8N4XEqIzAEXsUs\nj++CNc6MMXXvoLcip1lBiri1WOBEC5J8fBhJBaTm3bUWxfP+gn0ZSYTbEJ9akTAg\nlVWwgDlBAgMBAAECggEAX5N+kJD9rYRQqtPT/GMP1PWMw17PqFDorbL7qnPZMEUY\nmKMNEia3pGU/Y4XgOlwpF/gIjNUK7cL3h2abwKD5c/q1lI/IugvaHVPxn//5g10B\nS32VrVzdV3PxbzUNutiFT21vWa3pjFjmtfhdj3MTJIjJ5RDqpqukT09WwvPLdmid\nvapLB0bruxO2GYIIjkpXbWxW332z7rZ5O9fNC8wbH3ppvNsl1rXq0bpMz4Krwnu/\nGwTOH1lhWfDaSy6nlWg6ZQaRfAQte7V/nwqNflmNrnkUYunoX43a9A97eKIRzjnX\n8Unzj4Xw48pJ3v1naJwyQnhuRsjsgqMm9+za5YxKwwKBgQD8F+YFK66Sf7mj2OLW\nz2TnajhuTFKxMCj6yXq2LHF8VyoexyScvnttWTbjCXVkthQZyIJn8LcOrf2x6T1a\n3qiqDKS3wc3s1C8YFn3xoxY027c7t9251zmRoQYbXCoUFC3r2bt4vLMp+PQDKHob\nZSJqt136kLyGhme2uHitxj/0IwKBgQDFy++VDVDDoNJQu540FwygD2eF2/ZI2+Sv\nHk64PUy9mQNiMZSqp8B+TsM+7jEPn+xS0EUpSZZ+Sb3Ky8lJkXViYWvMi0lgmHEm\nMKc5Z81U4s1WPjkrdleqTxT3pvQJgkW//TaVi766jWfMEjZRSgoWNMtIMSfUc3Ga\nqEmYQeMxSwKBgDwrEBGH3YDFz28V4v5WPcUmCxX4TXxQ/FbvI8S7UtLUkw8JhOmM\nZTUyJ/GEXmqNMrr8qnNYdrigOn7uJmC76BG+NspNDXNLKXpcU+8Kd9Bh6JfuSJOE\nlQ73GdgJ5Vkpf9RdAWvNzg1kiAkA7jP/rXk/DsUxKm4JQlPQL616NeV1AoGBALR5\nCEgSly94DI3XMllK8p0UkRuFAKmn4XebCq52WA/ijkDJBmHToAJfMSy5PpCIFaPW\nHlS2rRbbh82CtU1n6Bf01dwS9sepMAxtdhcdzC74pexb5+PtHb3qXDI+5gnLEINF\nsckvcb5biWqc72yqRpvOXfCn0TS6hNxdUpEXBQoTAoGAfj5hjcc0hIlSsyTgfGEf\ngLt/zszDW1iSjgx7dF3Uj3gHGUyu6xkhW1vyeOHkdgpuHq0sjMa2IDFrrEQAUc6L\nMbHo8bHELaHnu0aRo13l60g8qxRZxh5OL3ATOSwq7jyT3hRUtMJDpyOdfu8khJUc\nDnGRb4cATICHQ//QgcJQ0m8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pi-logger@piproject-179120.iam.gserviceaccount.com",
+  "client_id": "100388459773543408407",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pi-logger%40piproject-179120.iam.gserviceaccount.com"
+}

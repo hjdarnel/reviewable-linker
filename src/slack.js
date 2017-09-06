@@ -7,7 +7,18 @@ const _ = require('lodash');
 const parser = require('./parser.js');
 const validateInput = require('./validateInput.js');
 
-const logger = bunyan.createLogger({name: 'reviewable-linker'});
+const projectId = 'piproject-179120';
+const loggingBunyan = require('@google-cloud/logging-bunyan')({
+    projectId: projectId,
+    keyFilename: './piProject-9ab7aee26f73.json'
+});
+
+const logger = bunyan.createLogger({
+    name: 'reviewable-linker',
+    streams: [
+        loggingBunyan.stream('info')
+    ]
+});
 const slackToken = process.env.SLACK_TOKEN || '';
 
 const id = 1;
@@ -62,7 +73,9 @@ const sendMessage = (reviews) => {
         channel,
         text
     };
-    logger.info(`Sending message in ${channel}:`, text);
+
+    const channelName = rtm.dataStore.getChannelGroupOrDMById(channel);
+    logger.info(`Sending message in ${channelName.name}:`, text);
     rtm.send(message);
 };
 

@@ -1,6 +1,18 @@
 const bunyan = require('bunyan');
 const _ = require('lodash');
-const logger = bunyan.createLogger({name: 'reviewable-linker'});
+
+const projectId = 'piproject-179120';
+const loggingBunyan = require('@google-cloud/logging-bunyan')({
+    projectId: projectId,
+    keyFilename: './piProject-9ab7aee26f73.json'
+});
+
+const logger = bunyan.createLogger({
+    name: 'reviewable-linker',
+    streams: [
+        loggingBunyan.stream('info')
+    ]
+});
 
 const validateInput = (results) => {
     for (const result of results) {
