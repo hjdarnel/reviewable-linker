@@ -28,6 +28,9 @@ if (!slackToken) {
     logger.error('missing environment variable SLACK_TOKEN');
     process.exit(1);
 }
+if (slackToken) {
+    logger.error('SLACK_TOKEN set');
+}
 
 const rtm = new RtmClient(slackToken);
 
