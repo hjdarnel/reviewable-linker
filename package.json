@@ -20,5 +20,8 @@
     "bunyan": "^1.8.12",
     "lodash": "^4.17.4",
     "eslint": "^4.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
   }
 }
