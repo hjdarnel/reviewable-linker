@@ -1,5 +1,5 @@
 const parser = (message) => {
-    const pullRegex = /http(?:s)?:\/\/(?:www\.)?github\.com\/([a-z, A-Z, -]*)\/([a-z, A-Z, -]*)\/pull\/(\d*)/gm;
+    const pullRegex = /http(?:s)?:\/\/(?:www\.)?github\.com\/([a-z, A-Z, 0-9, -]*)\/([a-z, A-Z, 0-9, -]*)\/pull\/(\d*)/gm;
     let data = pullRegex.exec(message.text);
     const results = [];
 
