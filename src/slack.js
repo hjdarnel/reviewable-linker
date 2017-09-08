@@ -62,7 +62,9 @@ const sendMessage = (reviews) => {
         channel,
         text
     };
-    logger.info(`Sending message in ${channel}:`, text);
+
+    const channelName = rtm.dataStore.getChannelGroupOrDMById(channel);
+    logger.info(`Sending message in ${channelName.name}:`, text);
     rtm.send(message);
 };
 
