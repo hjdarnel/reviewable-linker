@@ -34,8 +34,10 @@ const connect = () => {
     rtm.start();
 
     rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-        let results = parser(message);
-        results = validateInput(results);
+        const response = parser(message);
+        logger.warn(response);
+        const results = validateInput(response);
+
         if (!_.isEmpty(results)) {
             results.unshift(message.channel);
             sendMessage(results);
@@ -50,7 +52,7 @@ const sendMessage = (reviews) => {
     reviews.shift();
 
     _.map(reviews, (review) => {
-        urls.push(`https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullNumber}`);
+        urls.push(`https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullNumber}  ${review.deletions} | ${review.additions}`);
     });
 
     for (const url of urls) {
