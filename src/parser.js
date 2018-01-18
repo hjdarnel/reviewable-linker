@@ -20,17 +20,15 @@ const parser = (message) => {
         };
 
         getPull(team, repository, pullNumber)
-        .then((response, pull) => {
+        .then((response) => {
             pull.additions = response.data.additions;
             pull.deletions = response.data.deletions;
         })
         .catch((err) => {
             logger.warn('Error getting pull from Github', err);
-        })
-        .finally(() => {
-            results.push(pull);
         });
 
+        results.push(pull);
         data = pullRegex.exec(message.text);
     }
 

@@ -10,10 +10,7 @@ if (!token) {
 }
 
 var github = new GitHubApi({
-    // optional
-    timeout: 0,
-    host: 'api.github.com', // should be api.github.com for GitHub
-    pathPrefix: '', // for some GHEs; none for GitHub
+    host: 'api.github.com',
     protocol: 'https'
 });
 
@@ -25,11 +22,7 @@ github.authenticate({
 
 const getPull = (team, repository, pullNumber) => {
     const deferred = Q.defer();
-    // const params = {
-    //     owner: team,
-    //     repo,
-    //     number
-    // };
+
     github.pullRequests.get({owner: team, repo: repository, number: pullNumber})
     .then((pull) => {
         deferred.resolve(pull);
