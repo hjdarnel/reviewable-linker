@@ -49,7 +49,7 @@ const connect = () => {
 const emojifyInt = (value, isAddition) => { //eslint-disable-line no-unused-vars
 
     if (value === 0) {
-        return ':0:';
+        return ':0-red:';
     }
 
     if (value > 0 && value < 30) {
