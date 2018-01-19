@@ -23,6 +23,8 @@ github.authenticate({
 const getPull = (team, repository, pullNumber) => {
     const deferred = Q.defer();
 
+
+
     github.pullRequests.get({owner: team, repo: repository, number: pullNumber})
     .then((pull) => {
         deferred.resolve(pull);
