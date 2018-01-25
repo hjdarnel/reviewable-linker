@@ -99,7 +99,7 @@ https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullN
     }
 
     for (const url of urls) {
-        text = `${text}\n${url}`;
+        text = `${text}\n\n${url}`;
     }
     const message = {
         id,
