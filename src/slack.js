@@ -87,10 +87,10 @@ const sendMessage = (reviews) => {
         review.deletionsEmoji = emojifyInt(review.deletions, false);
 
         if (review.state === 'Closed') {
-            review.state = `:no_entry_sign:${review.state}`;
+            review.state = `:no_entry_sign: ${review.state}`;
         }
         if (review.state === 'Open') {
-            review.state = `:white_check_mark:${review.state}`;
+            review.state = `:white_check_mark: ${review.state}`;
         }
 
         urls.push(`"*${review.title}*" in _${review.repository}_
