@@ -7,10 +7,10 @@
     "url": "hjdarnel/reviewable-linker"
   },
   "scripts": {
-    "start:dev": "npm install && nodemon 'npm run test && npm run start' | bunyan -o short -l debug",
-    "start": "node src/server.js",
+    "start:dev": "npm install && nodemon 'npm run test && node --inspect src/server.js' | bunyan -o short -l debug",
+    "start": "npm install && nodemon src/server.js | bunyan -o short -l debug",
     "test": "npm run lint",
-    "lint": "eslint src/*.js --cache"
+    "lint": "eslint src/**/*.js --cache"
   },
   "author": "Henry Darnell",
   "license": "ISC",
