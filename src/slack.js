@@ -42,7 +42,11 @@ const connect = () => {
         .then((validated) => {
             if (!_.isEmpty(validated.pulls)) {
                 validated.channel = message.channel;
-                sendMessage(validated);
+                if (message.thread_ts) {
+                    sendMessage(validated, message.ts);
+                } else {
+                    sendMessage(validated);
+                }
             }
         });
       });
@@ -77,7 +81,7 @@ const emojifyInt = (value, isAddition) => { //eslint-disable-line no-unused-vars
     return '';
 };
 
-const sendMessage = (message) => {
+const sendMessage = (message, ts) => {
     const urls = [];
     const channel = message.channel;
     let text = '';
@@ -93,10 +97,17 @@ const sendMessage = (message) => {
         if (review.state === 'Open') {
             review.state = `:white_check_mark: ${review.state}`;
         }
-
-        urls.push(`"*${review.title}*" in _${review.repository}_
+        if (ts) {
+            urls.push(`"*${review.title}*"
+in _${review.repository}_ - *${review.state}*
+${review.commits} commits - ${review.additionsEmoji} +${review.additions} | -${review.deletions} ${review.deletionsEmoji}
+https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullNumber}`);
+        }
+        else {
+            urls.push(`"*${review.title}*" in _${review.repository}_
 *${review.state}* - ${review.commits} commits - ${review.additionsEmoji} +${review.additions} | -${review.deletions} ${review.deletionsEmoji}
 https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullNumber}`);
+        }
     }
 
     for (const url of urls) {
@@ -108,6 +119,10 @@ https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullN
         channel,
         text
     };
+
+    if (ts) {
+        response.thread_ts = ts;
+    }
 
     const channelName = rtm.dataStore.getChannelGroupOrDMById(channel);
     logger.info(`Sending message in ${channelName.name}:`, text);
