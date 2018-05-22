@@ -5,8 +5,9 @@ const logger = bunyan.createLogger({name: 'reviewable-linker'});
 
 const parser = (message) => {
     const deferred = Q.defer();
-    const results = [];
-    const pulls = [];
+    const results = {
+        pulls: []
+    };
     const promises = [];
 
     const pullRegex = /http(?:s)?:\/\/(?:www\.)?github\.com\/([a-z, A-Z, 0-9, -]*)\/([a-z, A-Z, 0-9, -]*)\/pull\/(\d*)/gm;
@@ -19,14 +20,12 @@ const parser = (message) => {
             pullNumber: data[3]
         };
 
-        pulls.push(pull);
+        results.pulls.push(pull);
         data = pullRegex.exec(message.text);
     }
 
-
-    for (const pull of pulls) {
-        promises.push(
-            getPull(pull.team, pull.repository, pull.pullNumber)
+    for (const pull of results.pulls) {
+        const promiseGithub = getPull(pull.team, pull.repository, pull.pullNumber)
             .then((response) => {
                 pull.title = response.data.title;
                 pull.state = response.data.state;
@@ -37,11 +36,9 @@ const parser = (message) => {
             })
             .catch((err) => {
                 logger.warn('Error getting pull from Github', err);
-            })
-            .finally(() => {
-                results.push(pull);
-            })
-        );
+            });
+
+        promises.push(promiseGithub);
     }
 
     Q.all(promises)
@@ -53,7 +50,6 @@ const parser = (message) => {
         });
 
     return deferred.promise;
-
 };
 
 module.exports = parser;

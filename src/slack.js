@@ -35,12 +35,14 @@ const connect = () => {
     rtm.start();
 
     rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-        parser(message).then((response) => {
-            const results = validateInput(response);
-
-            if (!_.isEmpty(results)) {
-                results.unshift(message.channel);
-                sendMessage(results);
+        parser(message)
+        .then((response) => {
+            return validateInput(response);
+        })
+        .then((validated) => {
+            if (!_.isEmpty(validated.pulls)) {
+                validated.channel = message.channel;
+                sendMessage(validated);
             }
         });
       });
@@ -75,13 +77,12 @@ const emojifyInt = (value, isAddition) => { //eslint-disable-line no-unused-vars
     return '';
 };
 
-const sendMessage = (reviews) => {
+const sendMessage = (message) => {
     const urls = [];
-    const channel = reviews[0];
+    const channel = message.channel;
     let text = '';
-    reviews.shift();
 
-    for (const review of reviews) {
+    for (const review of message.pulls) {
         review.state = caps(review.state);
         review.additionsEmoji = emojifyInt(review.additions, true);
         review.deletionsEmoji = emojifyInt(review.deletions, false);
@@ -101,7 +102,7 @@ https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullN
     for (const url of urls) {
         text = `${text}\n\n${url}`;
     }
-    const message = {
+    const response = {
         id,
         type,
         channel,
@@ -110,7 +111,7 @@ https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullN
 
     const channelName = rtm.dataStore.getChannelGroupOrDMById(channel);
     logger.info(`Sending message in ${channelName.name}:`, text);
-    rtm.send(message);
+    rtm.send(response);
 };
 
 module.exports = connect;
