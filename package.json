@@ -20,10 +20,10 @@
     "capitalize": "1.0.0",
     "eslint": "4.6.1",
     "github": "13.1.0",
-    "lodash": "4.17.4",
+    "lodash": "~4.17.10",
     "q": "1.5.1"
   },
   "devDependencies": {
-    "nodemon": "1.12.0"
+    "nodemon": "~1.17.5"
   }
 }
