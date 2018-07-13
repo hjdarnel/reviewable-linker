@@ -1,6 +1,14 @@
-language: node_js
-node_js:
-  - "8"
-cache:
-  directories:
-    - "node_modules"
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+install:
+  - travis_retry docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+
+script: true
+
+after_success:
+  - travis_retry docker build -t $DOCKER_USERNAME/$SERVICE:$TRAVIS_BRANCH -f ./docker/Dockerfile .
+  - travis_retry docker push $DOCKER_USERNAME/$SERVICE:$TRAVIS_BRANCH
