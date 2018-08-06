@@ -100,12 +100,12 @@ const sendMessage = (message, ts) => {
         if (ts) {
             urls.push(`"*${review.title}*"
 in _${review.repository}_ - *${review.state}*
-${review.commits} commits - ${review.additionsEmoji} +${review.additions} | -${review.deletions} ${review.deletionsEmoji}
+${review.commits} commit${review.commits > 1 ? 's' : ''} - ${review.additionsEmoji} +${review.additions} | -${review.deletions} ${review.deletionsEmoji}
 https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullNumber}`);
         }
         else {
             urls.push(`"*${review.title}*" in _${review.repository}_
-*${review.state}* - ${review.commits} commits - ${review.additionsEmoji} +${review.additions} | -${review.deletions} ${review.deletionsEmoji}
+*${review.state}* - ${review.commits} commit${review.commits > 1 ? 's' : ''} - ${review.additionsEmoji} +${review.additions} | -${review.deletions} ${review.deletionsEmoji}
 https://reviewable.io/reviews/${review.team}/${review.repository}/${review.pullNumber}`);
         }
     }
