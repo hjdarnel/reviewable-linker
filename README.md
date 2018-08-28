@@ -1,4 +1,4 @@
-# Reviewable Linker
+# Reviewable Linker [![Build Status](https://travis-ci.com/hjdarnel/reviewable-linker.svg?branch=master)](https://travis-ci.com/hjdarnel/reviewable-linker)
 
 This is a simple Slack bot that will listen for GitHub PR links in whatever channel it's invited to, and respond with the corresponding Reviewable link.
 
