@@ -29,6 +29,8 @@ const parser = async (message: ISlackMessageDTO): Promise<IGithubMessage> => {
 
         if (_.get(pull, 'shareLink') === 'n' || _.get(pull, 'shareLink') === 'no') {
             logger.info('Skipped link', pull);
+        } else if (!pull.organization || !pull.repository || !pull.pullNumber) {
+            logger.warn('Empty field! Skipping', pull);
         } else {
             results.pulls.push(pull);
         }

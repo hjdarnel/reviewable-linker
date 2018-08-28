@@ -33,7 +33,8 @@ const connect = () => {
 
             if (!_.isEmpty(validatedMessage.pulls)) {
                 if (message.thread_ts) {
-                    await sendMessage(validatedMessage, message.channel, message.ts);
+                    logger.info('thread!', message);
+                    await sendMessage(validatedMessage, message.channel, message.thread_ts);
                 } else {
                     await sendMessage(validatedMessage, message.channel);
                 }
