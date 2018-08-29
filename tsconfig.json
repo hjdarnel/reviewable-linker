@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "removeComments": true,
+        "preserveConstEnums": false,
+        "sourceMap": true,
+        "target": "esnext",
+        "outDir": "./bin"
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "lib": ["esnext"]
+}
