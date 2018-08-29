@@ -6,7 +6,6 @@ const logger = bunyan.createLogger({ name: 'reviewable-linker' });
 
 const validateInput = (message: IGithubMessage) => {
     for (const pull of message.pulls) {
-        logger.info(pull, 'here');
         if (!pull.repository || !pull.pullNumber || !pull.organization) {
             logger.warn('Invalid pull url', pull);
             _.remove(message.pulls, pull);

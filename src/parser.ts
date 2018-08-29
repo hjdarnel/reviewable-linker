@@ -44,6 +44,7 @@ const parser = async (message: ISlackMessageDTO): Promise<IGithubMessage> => {
                     ...pull,
                     title: data.title,
                     state: data.state,
+                    merged: data.merged,
                     commits: data.commits,
                     additions: data.additions,
                     deletions: data.deletions

@@ -82,10 +82,11 @@ const sendMessage = (message: IGithubMessage, channel: string, ts?: string) => {
         review.additionsEmoji = emojifyInt(review.additions);
         review.deletionsEmoji = emojifyInt(review.deletions);
 
-        if (review.state === 'Closed') {
+        if (review.merged === true) {
+            review.state = `:git-merge: Merged`;
+        } else if (review.state === 'Closed') {
             review.state = `:no_entry_sign: ${review.state}`;
-        }
-        if (review.state === 'Open') {
+        } else if (review.state === 'Open') {
             review.state = `:white_check_mark: ${review.state}`;
         }
         if (ts) {

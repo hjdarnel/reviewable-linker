@@ -28,13 +28,14 @@ const getPull = async ({
 }: IParsedUrl): Promise<IGithubDTO> => {
     return await github.pullRequests
         .get({ owner: organization, repo: repository, number: pullNumber })
-        .then(pull => {
+        .then(response => {
             return {
-                title: pull.data.title,
-                state: pull.data.state,
-                commits: pull.data.commits,
-                additions: pull.data.additions,
-                deletions: pull.data.deletions
+                title: response.data.title,
+                state: response.data.state,
+                commits: response.data.commits,
+                additions: response.data.additions,
+                deletions: response.data.deletions,
+                merged: response.data.merged
             };
         })
         .catch(err => {

@@ -16,6 +16,7 @@ interface IGithubMessage {
 interface IGithubDTO extends IParsedUrl {
     title: string;
     state: string;
+    merged: boolean;
     commits: number;
     additions: number;
     deletions: number;
