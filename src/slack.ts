@@ -83,11 +83,11 @@ const sendMessage = (message: IGithubMessage, channel: string, ts?: string) => {
         review.deletionsEmoji = emojifyInt(review.deletions);
 
         if (review.merged === true) {
-            review.state = `:git-merge: Merged`;
+            review.state = `:git-pull-merged: Merged`;
         } else if (review.state === 'Closed') {
-            review.state = `:no_entry_sign: ${review.state}`;
+            review.state = `:git-pull-closed: ${review.state}`;
         } else if (review.state === 'Open') {
-            review.state = `:white_check_mark: ${review.state}`;
+            review.state = `:git-pull-open: ${review.state}`;
         }
         if (ts) {
             urls.push(`"*${review.title}*"
