@@ -47,27 +47,27 @@ const connect = () => {
 
 const emojifyInt = (value: number) => {
     if (value === 0) {
-        return ':0-red:';
+        return ':face_with_cowboy_hat:';
     }
 
     if (value > 0 && value < 30) {
-        return ':10:';
+        return ':face_with_cowboy_hat:';
     }
 
     if (value > 20 && value < 100) {
-        return ':100:';
+        return ':face_with_cowboy_hat:';
     }
 
     if (value > 99 && value < 200) {
-        return ':1000:';
+        return ':face_with_cowboy_hat:';
     }
 
     if (value > 199 && value < 350) {
-        return ':10k:';
+        return ':face_with_cowboy_hat:';
     }
 
     if (value > 349) {
-        return ':100k:';
+        return ':face_with_cowboy_hat:';
     }
 
     return '';
@@ -83,11 +83,11 @@ const sendMessage = (message: IGithubMessage, channel: string, ts?: string) => {
         review.deletionsEmoji = emojifyInt(review.deletions);
 
         if (review.merged === true) {
-            review.state = `:git-pull-merged: Merged`;
+            review.state = `:face_with_cowboy_hat: Merged`;
         } else if (review.state === 'Closed') {
-            review.state = `:git-pull-closed: ${review.state}`;
+            review.state = `:face_with_cowboy_hat: ${review.state}`;
         } else if (review.state === 'Open') {
-            review.state = `:git-pull-open: ${review.state}`;
+            review.state = `:face_with_cowboy_hat: ${review.state}`;
         }
         if (ts) {
             urls.push(`"*${review.title}*"
