@@ -15,7 +15,6 @@ install:
   - npm run lint
 
 script:
-  # require the branch name to be master (note for PRs this is the base branch name)
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_retry docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; fi
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm prune --production; fi
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_retry docker build -t $DOCKER_USERNAME/$SERVICE:$TRAVIS_BRANCH -f ./docker/Dockerfile .; fi
