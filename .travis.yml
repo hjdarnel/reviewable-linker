@@ -8,6 +8,10 @@ node_js:
 
 services:
   - docker
+  
+branches:
+  only:
+    - master
 
 install:
   - npm ci .
