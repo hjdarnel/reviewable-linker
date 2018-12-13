@@ -1,16 +1,22 @@
-import { RTMClient } from '@slack/client';
+import { RTMClient, WebClient } from '@slack/client';
 import * as bunyan from 'bunyan';
 import * as _ from 'lodash';
 import * as caps from 'capitalize';
 
 import parser from './parser';
 import validateInput from './validateInput';
-import { IGithubDTO, ISendSlackMessageDTO, IGithubMessage } from './interface';
+import { IGithubDTO, ISendSlackMessageDTO, IGithubMessage, ISlackReactionDTO } from './interface';
 
 const logger = bunyan.createLogger({ name: 'reviewable-linker' });
 const slackToken = process.env.SLACK_TOKEN || '';
 const id = 1;
 const type = 'message';
+
+interface ISelf {
+    id: string;
+    name: string;
+}
+let self: ISelf;
 
 if (!slackToken) {
     logger.error('missing environment variable SLACK_TOKEN');
@@ -18,13 +24,22 @@ if (!slackToken) {
 }
 
 const rtm = new RTMClient(slackToken);
+const web = new WebClient(slackToken);
 
 const connect = () => {
     rtm.on('authenticated', rtmStartData => {
-        logger.info(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}`);
+        self = rtmStartData.self;
+        logger.info(`Logged in as ${self.name} of team ${rtmStartData.team.name}`);
     });
 
     rtm.start();
+
+    rtm.on('reaction_added', async (body: ISlackReactionDTO) => {
+        if (body.item_user === self.id && body.reaction === 'no_reviewable') {
+            logger.info('Deleting a message', body);
+            web.chat.delete({ channel: body.item.channel, ts: body.item.ts }).catch(logger.error);
+        }
+    });
 
     rtm.on('message', async message => {
         try {
@@ -90,6 +105,7 @@ const sendMessage = (message: IGithubMessage, channel: string, ts?: string) => {
             review.state = `:git-pull-open: ${review.state}`;
         }
         if (ts) {
+            logger.info('Sending message in thread');
             urls.push(`"*${review.title}*"
 in _${review.repository}_ - *${review.state}*
 ${review.commits} commit${review.commits > 1 ? 's' : ''} - ${review.additionsEmoji} +${

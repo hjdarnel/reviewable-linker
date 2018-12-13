@@ -41,4 +41,25 @@ interface ISendSlackMessageDTO {
     thread_ts?: string;
 }
 
-export { IParsedUrl, IGithubDTO, ISlackMessageDTO, ISendSlackMessageDTO, IGithubMessage };
+interface ISlackReactionDTO {
+    type: string;
+    user: string;
+    item: {
+        type: string;
+        channel: string;
+        ts: string;
+    };
+    reaction: string;
+    item_user: string;
+    event_ts: string;
+    ts: string;
+}
+
+export {
+    IParsedUrl,
+    IGithubDTO,
+    ISlackMessageDTO,
+    ISendSlackMessageDTO,
+    IGithubMessage,
+    ISlackReactionDTO
+};
