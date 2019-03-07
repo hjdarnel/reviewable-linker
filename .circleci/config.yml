@@ -1,0 +1,57 @@
+version: 2 # use CircleCI 2.0
+jobs:
+  test:
+    working_directory: ~/reviewable-linker
+    docker: # run the steps with Docker
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install Deps
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: # run tests
+          name: Test
+          command: npm test
+      - run: # run linter
+          name: Lint
+          command: npm run lint
+
+  build:
+    working_directory: ~/reviewable-linker
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install deps
+          command: npm install
+      - run:
+          name: Build JS
+          command: npm run build
+      - run:
+          name: Build for DockerHub
+          command: |
+            docker build -t $DOCKER_USERNAME/reviewable-linker:$CIRCLE_BRANCH -f ./docker/Dockerfile .
+            docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+            docker push $DOCKER_USERNAME/reviewable-linker:$CIRCLE_BRANCH
+workflows:
+  version: 2
+  test_and_build:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /^pull\/.*$/
