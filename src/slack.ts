@@ -102,7 +102,7 @@ const sendMessage = (message: IGithubMessage, channel: string, ts?: string) => {
         } else if (review.state === 'Closed') {
             review.state = `:git-pull-closed: ${review.state}`;
         } else if (review.state === 'Open') {
-            review.state = `:git-pull-open: ${review.state}`;
+            review.state = `:git-pull-open: hi mom ${review.state}`;
         }
         if (ts) {
             logger.info('Sending message in thread');

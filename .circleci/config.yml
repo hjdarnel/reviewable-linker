@@ -44,17 +44,31 @@ jobs:
       - run:
           name: Build for DockerHub
           command: |
-            docker build -t $DOCKER_USERNAME/reviewable-linker:$CIRCLE_BRANCH -f ./docker/Dockerfile .
+            docker build -t $DOCKER_USERNAME/$SERVICE:$CIRCLE_BRANCH -f ./docker/Dockerfile .
             docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-            docker push $DOCKER_USERNAME/reviewable-linker:$CIRCLE_BRANCH
+            docker push $DOCKER_USERNAME/$SERVICE:$CIRCLE_BRANCH
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd bots && dc pull $SERVICE && dc stop $SERVICE && dc rm -fv $SERVICE && dc up -d $SERVICE"
 workflows:
   version: 2
-  test_and_build:
+  test_and_build_and_deploy:
     jobs:
       - test
       - build:
           requires:
             - test
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
           filters:
             branches:
               only: master
