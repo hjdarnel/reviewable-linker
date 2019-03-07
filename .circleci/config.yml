@@ -54,4 +54,4 @@ workflows:
             - test
           filters:
             branches:
-              ignore: /^pull\/.*$/
+              only: master
