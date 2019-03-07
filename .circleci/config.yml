@@ -54,7 +54,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "cd bots && dc pull $SERVICE && dc stop $SERVICE && dc rm -fv $SERVICE && dc up -d $SERVICE"
+            ssh $SSH_USER@$SSH_HOST "cd bots && docker-compose pull $SERVICE && docker-compose stop $SERVICE && docker-compose rm -fv $SERVICE && docker-compose up -d $SERVICE"
 workflows:
   version: 2
   test_and_build_and_deploy:
