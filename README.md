@@ -1,4 +1,4 @@
-# Reviewable Linker
+# Reviewable Linker [![CircleCI](https://circleci.com/gh/hjdarnel/reviewable-linker.svg?style=svg)](https://circleci.com/gh/hjdarnel/reviewable-linker)
 
 This is a simple Slack bot that will listen for GitHub PR links in whatever channel it's invited to, and respond with the corresponding Reviewable link.
 
