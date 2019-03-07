@@ -15,3 +15,9 @@ This is a simple Slack bot that will listen for GitHub PR links in whatever chan
 Must have environment variable `SLACK_TOKEN` set to a bot user token for your Slack team. This begins with `xoxb-...`
 
 Finally, invite bot to a channel you'd like it to participate in. It will listen and respond in the same channel.
+
+## Deploying
+
+The master branch is deployed to my personal droplet, so only code intended for production should ever be in master.
+
+See [CircleCI](https://circleci.com/gh/hjdarnel/reviewable-linker) for build status.
