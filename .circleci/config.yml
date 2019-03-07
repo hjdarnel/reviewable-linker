@@ -21,6 +21,9 @@ jobs:
       - run: # run linter
           name: Lint
           command: npm run lint
+      - run:
+          name: Build JS
+          command: npm run build
 
   build:
     working_directory: ~/reviewable-linker
