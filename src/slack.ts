@@ -110,14 +110,12 @@ const sendMessage = (message: IGithubMessage, channel: string, ts?: string) => {
 in _${review.repository}_ - *${review.state}*
 ${review.commits} commit${review.commits > 1 ? 's' : ''} - ${review.additionsEmoji} +${
                 review.additions
-            } | -${review.deletions} ${review.deletionsEmoji}
-https://reviewable.io/reviews/${review.organization}/${review.repository}/${review.pullNumber}`);
+            } | -${review.deletions} ${review.deletionsEmoji}`);
         } else {
             urls.push(`"*${review.title}*" in _${review.repository}_
 *${review.state}* - ${review.commits} commit${review.commits > 1 ? 's' : ''} - ${
                 review.additionsEmoji
-            } +${review.additions} | -${review.deletions} ${review.deletionsEmoji}
-https://reviewable.io/reviews/${review.organization}/${review.repository}/${review.pullNumber}`);
+            } +${review.additions} | -${review.deletions} ${review.deletionsEmoji}`);
         }
     }
 
