@@ -30,7 +30,7 @@
     "@types/bunyan": "1.8.6",
     "@types/capitalize": "1.0.1",
     "@types/lodash": "4.14.123",
-    "husky": "2.1.0",
+    "husky": "2.2.0",
     "lint-staged": "8.1.5",
     "nodemon": "1.19.0",
     "prettier": "1.17.0",
