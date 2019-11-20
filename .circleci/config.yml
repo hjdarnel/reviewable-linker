@@ -31,8 +31,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
